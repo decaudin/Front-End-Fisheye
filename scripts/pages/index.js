@@ -1,44 +1,35 @@
-    async function getPhotographers() {
-        // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet, 
-        // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-        let photographers = [
-            {
-                "name": "Ma data test",
-                "id": 1,
-                "city": "Paris",
-                "country": "France",
-                "tagline": "Ceci est ma data test",
-                "price": 400,
-                "portrait": "account.png"
-            },
-            {
-                "name": "Autre data test",
-                "id": 2,
-                "city": "Londres",
-                "country": "UK",
-                "tagline": "Ceci est ma data test 2",
-                "price": 500,
-                "portrait": "account.png"
-            },
-        ]
-        // et bien retourner le tableau photographers seulement une fois récupéré
-        return ({
-            photographers: [...photographers, ...photographers, ...photographers]})
-    }
+import { getPhotographersData } from '../api/getPhotographersData.js';
+import { photographerTemplate } from '../templates/photographerAll.js';
+import { addArticleClickEvent } from '../utils/photographerSimplePage.js'; 
 
-    async function displayData(photographers) {
+    const displayData = async (photographers) => {
+
         const photographersSection = document.querySelector(".photographer_section");
 
         photographers.forEach((photographer) => {
+
+            // Utilisation du template pour afficher les profils des photographes
+
             const photographerModel = photographerTemplate(photographer);
+
             const userCardDOM = photographerModel.getUserCardDOM();
+            userCardDOM.setAttribute('aria-label', `Profil de ${photographer.name}`);
+            userCardDOM.setAttribute('tabindex', '0');
+
             photographersSection.appendChild(userCardDOM);
+
+            // Redirection vers la page de détail du photographe sélectionné
+
+            addArticleClickEvent(userCardDOM, photographerModel.id)
         });
     }
 
-    async function init() {
-        // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
+    const init = async () => {
+
+        // Récupération des données depuis le fichier JSON
+
+        const { photographers } = await getPhotographersData("../../data/photographers.json");
+
         displayData(photographers);
     }
     

@@ -1,37 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/photographer.css" rel="stylesheet" type="text/css">
+    <script type="module" src="/scripts/pages/photographer.js" defer></script>
+    <script type="module" src="/scripts/utils/contactForm.js" defer></script>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/" aria-label="Revenir à l'accueil" tabindex="0">
+        <img src="assets/images/logo.png" alt="fisheye" class="logo">
+      </a>
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+      <section class="photograph-header">
+        <div class="photographer_data">
+          <h1></h1>
+          <span></span>
+          <p></p>
+        </div>
+        <button class="contact_button" aria-label="Ouvrir le formulaire de contact">Contactez-moi</button>
+        <img src="" alt="">
+      </section>
+      <section class="photograph_gallery">
+        <div class="photograph_filter">
+          <p>Trier par</p>
+          <div class="dropdown" aria-label="Filtrer la galerie" tabindex="0">
+            <button class="dropbtn" data-value="popularity">Popularité</button>
+            <img class="arrow-top" src="./assets/icons/arrow-top.svg" alt="ouvrir">
+            <div class="dropdown-content">
+              <button class="filterBtn" data-value="date" tabindex="0">
+                Date
+              </button>
+              <button class="filterBtn" data-value="title" tabindex="0">
+                Titre
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="gallery_grid"></div>
+      </section>
     </main>
-    <div id="contact_modal">
+    <aside class="likes_container">
+      <span class="likes_number">
+        <p class="likes"></p>
+        <img src="./assets/icons/heart.svg" alt="like">
+      </span>
+      <span class="price"></span>
+    </aside>
+    <!--<div class="img_modal_container">
+      <div class="img_modal">
+        <img src="./assets/icons/close-red.svg" alt="fermer la modale" class="img_modal_close" tabindex="0">
+        <img src="./assets/icons/arrow-left.svg" alt="image précédente" class="img_modal_prev" tabindex="0">
+        <img src="./assets/icons/arrow-right.svg" alt="image suivante" class="img_modal_next" tabindex="0">
+      </div>
+    </div>-->
+    <aside id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+				<header class="contact_modal_header">
+          <h2 class="contact_modal_title">Contactez-moi</h2>
+          <img src="assets/icons/close.svg" class="contact-modal_close" alt="fermer la modale" tabindex="0">
         </header>
-				<form>
+				<form id="modal_form">
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="prenom">Prénom</label>
+            <input id="prenom">
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <div>
+            <label for="nom">Nom</label>
+            <input id="nom">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email">
+          </div>
+          <div>
+            <label for="message">Votre message</label>
+            <textarea name="message" id="message" rows="4"></textarea>
+          </div>
+          <button class="contact_button" aria-label="Envoyer le formulaire">Envoyer</button>
 				</form>
 			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    </aside>
   </body>
 </html>
