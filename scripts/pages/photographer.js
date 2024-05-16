@@ -1,4 +1,5 @@
 import { getPhotographersData } from '../api/getPhotographersData.js';
+import { photographerSingleTemplate } from '../templates/photographerSingle.js';
 import { contactForm } from '../utils/contactForm.js';
 
 // Exécution de la fonction après le chargement du DOM
@@ -31,18 +32,18 @@ document.addEventListener("DOMContentLoaded", async () => {
       img.src = `assets/photographers/${photographerData[0].portrait}`;
       img.alt = photographerData[0].name;
     
-      // Gestion de la modale (ouverture, fermeture et soumission du formulaire de contact)
+      // Gestion de la modale de contact (ouverture, fermeture et soumission du formulaire de contact)
 
       contactForm(photographerData);
   
       // Gallerie
 
-    /*  if (photographerData) {
+      if (photographerData) {
         const photographerId = photographerData[0].id;
         const photographerPrice = photographerData[0].price;
         const filteredMedia = media.filter(item => item.photographerId === photographerId);
         const photographerTotalLikes = filteredMedia.reduce((total, media) => total + media.likes, 0);
-        createGallery(photographerId, filteredMedia, photographerTotalLikes, photographerPrice);
-      } */
+        photographerSingleTemplate(photographerId, filteredMedia, photographerTotalLikes, photographerPrice);
+      }
     }
   });

@@ -58,7 +58,98 @@ body {
 }
 
 .photograph_filter .dropdown {
+    background-color: #901C1C;
+}
+
+.gallery_grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 10px;
+    padding: 20px 0;
+    column-gap: 90px;
+}
+
+.gallery_image_wrapper {
+    cursor: pointer;
+}
+
+.gallery_image, .gallery_video {
+    height: 300px;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.gallery_img_content {
     display: flex;
+    justify-content: space-between;
+    color: #901C1C;
+}
+
+span.gallery_img_likes_wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 14%;
+    color: #901C1C;
+}
+
+.img_modal_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+}
+
+.img_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px 50px;
+    height: 75vh;
+    width: 40%;
+    z-index: 1000;
+}
+
+.img_modal_close {
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    left: 95%;
+}
+
+.img_modal_prev {
+    cursor: pointer;
+    position: absolute;
+    width: 77px;
+    top: 37%;
+    left: -2%;
+}
+
+.img_modal_next {
+    cursor: pointer;
+    position: absolute;
+    width: 77px;
+    top: 37%;
+    right: -2%;
+}
+
+img.img_modal_picture {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    display: flex;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.img_modal h3 {
+    color: #901C1C;
+    margin-top: 7px;
 }
 
 .modal {

@@ -8,7 +8,7 @@ class GalleryItem {
         this.mediaTitle = this.item.title;
         this.likesValue = document.createElement("p");
         this.likesLogo = document.createElement("img");
-        this.likesLogo.src = "./assets/icons/heart-red.svg";
+        this.likesLogo.src = liked ? "./assets/icons/heart-red-full.svg" : "./assets/icons/heart-red.svg";
         this.likesLogo.alt = "bouton j'aime";
     }
 
@@ -56,21 +56,21 @@ class GalleryItem {
         return mediaWrapper;
     }
 
+    // Fonction pour like/dislike un élément de la galerie
+
     toggleLike() {
-    
+        
         if (this.liked) {
             this.likesLogo.src = "./assets/icons/heart-red.svg";
-            this.item.likes--;
-            this.likesValue.textContent = this.item.likes;
+            this.likesValue.textContent = --this.item.likes;
         } else if (!this.liked) {
             this.likesLogo.src = "./assets/icons/heart-red-full.svg";
-            this.item.likes++;
-            this.likesValue.textContent = this.item.likes;
+            this.likesValue.textContent = ++this.item.likes;
         }
-    
+
         this.liked = !this.liked;
-    }
-    
+        
+    }    
 }
 
 // Définition d'un modèle pour une image de la galerie
@@ -87,7 +87,8 @@ class GalleryImage extends GalleryItem {
         imageWrapper.setAttribute("tabindex", 0);
         
         const image = document.createElement("img");
-        image.src = `./assets/gallery/${this.id}/${this.item.image}`;
+
+        image.src = `./assets/works/${this.id}/${this.item.image}`;
         image.className = "gallery_image";
         image.alt = this.item.title;
 
