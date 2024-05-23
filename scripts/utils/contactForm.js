@@ -2,6 +2,7 @@ export const contactForm = (photographerData) => {
 
   const contactModalTitle = document.querySelector(".contact_modal_title");
   contactModalTitle.innerHTML = `Contactez-moi<br>${photographerData[0].name}`;
+  const modal = document.querySelector(".modal");
   const form = document.getElementById("modal_form");
   const contactModal = document.getElementById("contact_modal");
   const contactButton = document.querySelector(".contact_button");
@@ -12,18 +13,32 @@ export const contactForm = (photographerData) => {
   contactButton.addEventListener("click", () => {
     contactModal.style.display = "block";
     closeContactButton.focus();    
-  })
+  });
 
   // Fermeture modale
 
   closeContactButton.addEventListener("click", () => {
     contactModal.style.display = "none";  
-  })
+  });
+
+  contactModal.addEventListener("click", () => {
+    contactModal.style.display = "none";
+  });
 
   closeContactButton.addEventListener("keydown", (e) => {
     if (e.key === "Enter"){
       contactModal.style.display = "none";  
     }
+  });
+
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape"){
+      contactModal.style.display = "none";
+    }
+  });
+
+  modal.addEventListener("click", (e) => {
+    e.stopPropagation();
   })
 
   // Soumission formulaire
@@ -39,5 +54,6 @@ export const contactForm = (photographerData) => {
     console.log(`Nom : ${lastName}`);
     console.log(`Email : ${email}`);
     console.log(`Message : ${message}`);
-  })
+    form.reset()
+  });
 }

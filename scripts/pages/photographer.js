@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const urlID = urlParams.get('id');
       const photographerData = photographers.filter(x => x.id == urlID);
   
-      // Hydratation des champs dans photographer-data
+      // Hydratation des champs dans l'entête de la page de chaque photographe
 
       const title = document.querySelector(".photographer_data h1");
       title.textContent = photographerData[0].name;
@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       contactForm(photographerData);
   
-      // Gallerie
+      // Affichage de la Gallerie via le template 'photographerSingleTemplate'
 
       if (photographerData) {
         const photographerId = photographerData[0].id;
         const photographerPrice = photographerData[0].price;
         const filteredMedia = media.filter(item => item.photographerId === photographerId);
         const photographerTotalLikes = filteredMedia.reduce((total, media) => total + media.likes, 0);
-        photographerSingleTemplate(photographerId, filteredMedia, photographerTotalLikes, photographerPrice);
+        photographerSingleTemplate(filteredMedia, photographerTotalLikes, photographerPrice);
       }
     }
   });
