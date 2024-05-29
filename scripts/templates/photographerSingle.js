@@ -4,11 +4,17 @@ import { filterMedia } from "../utils/filterMedia.js";
 
 export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => {
 
-    // ---------- Elément du DOM ---------- //
+    // ------------- Eléments du DOM ------------- //
 
     // Galerie
 
     const grid = document.querySelector(".gallery_grid");
+
+    // Filtre média
+
+    const dropdown = document.querySelector('.dropdown');
+    const arrow = document.querySelector('.arrow-top')
+    const filterBtn = document.querySelectorAll(".filterBtn")
 
     // Modale (lightbox)
 
@@ -26,6 +32,152 @@ export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => 
     const priceNumber = document.querySelector(".price");
     let currentIndex;
     let updatedTotalLikes = totalLikes;
+
+
+    // ------------- Gestion de la galerie de médias ------------- //
+    
+
+    // Fonction pour afficher et mettre à jour la galerie de médias
+
+    const updateGallery = () => {
+
+        // Efface la galerie actuelle
+
+        while (grid.firstChild) {
+            grid.removeChild(grid.firstChild);
+        }
+
+        // Parcours chaque élément filtré du tableau filteredMedia
+
+        filteredMedia.forEach((item, index) => {
+
+            let liked;
+            let galleryItem;
+
+            // Instanciation d'un élément de galerie en fonction de son type de média (image ou vidéo)
+
+            if (item.image) {
+                galleryItem = new GalleryImage(item, liked);
+            } else if (item.video) {
+                galleryItem = new GalleryVideo(item, liked);
+            } else {
+                throw new Error('Type de média non pris en charge');
+            }
+
+            // Création de l'élément DOM correspondant
+
+            const galleryItemElement = galleryItem.createDOMElement();
+
+            // Ajout de l'élément à la grille (grid)
+
+            grid.appendChild(galleryItemElement);
+
+            // Gestion des évènements de clic et clavier pour les likes
+
+            galleryItemElement.children[1].children[0].children[1].addEventListener("click", () => {
+                updateLikes(galleryItem.liked);
+            })
+
+            galleryItemElement.children[1].children[0].children[1].addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    updateLikes(galleryItem.liked);
+                }
+            })
+
+            // Gestion des évènements de clic et clavier pour afficher la modale de média (lightbox)
+
+            galleryItemElement.addEventListener('click', () => {
+                currentIndex = index;
+                handleMediaClick(item);
+            });
+            galleryItemElement.addEventListener('keydown', (e) => {
+                if (e.key === "Enter") {
+                    currentIndex = index;
+                    handleMediaClick(item);
+                }
+            });
+        });
+    };
+
+    // Fonction pour mettre à jour les likes
+
+    const updateLikes = (liked) => {
+        updatedTotalLikes += liked ? 1 : -1;
+        likesAmount.textContent = updatedTotalLikes;
+    };
+
+    // Apparition des médias par défault en fonction des likes (décroissant)
+
+    filteredMedia.sort((a, b) => b.likes - a.likes);
+
+    // Appel de la fonction updateGallery pour afficher les médias
+        
+    updateGallery();
+
+    // Ajout/retrait classe conditionnelle pour la flèche et les filtres (Filtration média)
+
+    dropdown.addEventListener('click', () => {
+        dropdown.classList.toggle('active');
+        arrow.classList.toggle("open");
+    });
+    
+    dropdown.addEventListener('keydown', (e) => {
+        if (e.key === "Enter") {
+            dropdown.classList.toggle('active');
+            arrow.classList.toggle("open");
+        }
+    });
+
+    // Appel de la fonction filterMedia (utils)
+
+    filterBtn.forEach(btn => {
+        filterMedia(btn, updateGallery, filteredMedia)
+    });
+
+
+    // ------------- Gestion de la modale (Lightbox) ------------- //
+
+
+    // Fonction pour reset le contenu précédent
+
+    const clearModalContent = () => {
+        const children = Array.from(imgModal.children);
+        children.forEach(child => {
+            if (child !== closeModal && child !== prevButton && child !== nextButton) {
+                imgModal.removeChild(child);
+            }
+        });
+    }
+
+    // Instanciation de la factory pour la modale (Lightbox)
+
+    const modalMediaFactory = new ModalMediaFactory();
+
+    // Fonction pour afficher les médias dans la lightbox
+
+    const handleMediaClick = (item) => {
+
+        clearModalContent();
+
+        // Utilisation de la modalMediaFactory pour créer le média
+
+        const media = modalMediaFactory.createMedia(item);
+
+        // Création de l'élement du DOM correspondant et ajout à imgModal
+
+        const mediaElement = media.createDOMElement();
+        imgModal.appendChild(mediaElement);
+
+        // Création et ajout du titre
+
+        const titleElement = media.createTitleElement();
+        imgModal.appendChild(titleElement);
+
+        // Affichage de la modale
+
+        imgModalContainer.style.display = "flex";
+        closeModal.focus();
+    }
 
     // Fermeture de la modale au clic
 
@@ -98,145 +250,8 @@ export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => 
             }
         }
     });
-
-    // Fonction pour reset le contenu précédent
-
-    function clearModalContent() {
-        const children = Array.from(imgModal.children);
-        children.forEach(child => {
-            if (child !== closeModal && child !== prevButton && child !== nextButton) {
-                imgModal.removeChild(child);
-            }
-        });
-    }
-
-    // Intanciation de la factory pour la modale (Lightbox)
-
-    const modalMediaFactory = new ModalMediaFactory();
-
-    // Gestion du clic sur une image ou une vidéo (Lightbox)
-
-    function handleMediaClick(item) {
-
-        clearModalContent();
-
-        // Utilisation de la modalMediaFactory pour créer le média
-
-        const media = modalMediaFactory.createMedia(item);
-
-        // Création de l'élement du DOM correspondant et ajout à imgModal
-
-        const mediaElement = media.createDOMElement();
-        imgModal.appendChild(mediaElement);
-
-        // Création et ajout du titre
-
-        const titleElement = media.createTitleElement();
-        imgModal.appendChild(titleElement);
-
-        // Affichage de la modale
-
-        imgModalContainer.style.display = "flex";
-        closeModal.focus();
-    }
-
-    // Filtrer les médias
-
-    const dropdown = document.querySelector('.dropdown');
-    const arrow = document.querySelector('.arrow-top')
-    const filterBtn = document.querySelectorAll(".filterBtn")
-
-    dropdown.addEventListener('click', () => {
-        dropdown.classList.toggle('active');
-        arrow.classList.toggle("open");
-    });
-
-    dropdown.addEventListener('keydown', (e) => {
-        if (e.key === "Enter") {
-            dropdown.classList.toggle('active');
-            arrow.classList.toggle("open");
-        }
-    });
-
-    filteredMedia.sort((a, b) => b.likes - a.likes);
-    updateGallery();
-
-    filterBtn.forEach(btn => {
-        filterMedia(btn, updateGallery, filteredMedia)
-    });  
-
-    function updateGallery() {
-
-        // Efface la galerie actuelle
-
-        while (grid.firstChild) {
-            grid.removeChild(grid.firstChild);
-        }
-
-        // Parcours chaque élément filtré
-
-        filteredMedia.forEach((item, index) => {
-            let liked = false;
-            let galleryItem;
-
-            // Instanciation d'un élément de galerie en fonction de son type de média (image ou vidéo)
-
-            if (item.image) {
-                galleryItem = new GalleryImage(item, liked);
-            } else if (item.video) {
-                galleryItem = new GalleryVideo(item, liked);
-            } else {
-                throw new Error('Type de média non pris en charge');
-            }
-
-            // Création de l'élément DOM correspondant
-
-            const galleryItemElement = galleryItem.createDOMElement();
-
-            // Ajout de l'élément à la grille (grid)
-
-            grid.appendChild(galleryItemElement);
-
-            // Gestion des évènements de clic et clavier pour les likes
-
-            galleryItemElement.children[1].children[0].children[1].addEventListener("click", () => {
-                updateLikes(galleryItem.liked);
-            })
-
-            galleryItemElement.children[1].children[0].children[1].addEventListener("keydown", (e) => {
-                if (e.key === "Enter") {
-                updateLikes(galleryItem.liked);
-                }
-            })
-
-            // Gestion des évènements de clic et clavier pour afficher la modale de média (lightbox)
-
-            galleryItemElement.addEventListener('click', () => {
-                currentIndex = index;
-                handleMediaClick(item, currentIndex);
-            });
-            galleryItemElement.addEventListener('keydown', (e) => {
-                if (e.key === "Enter") {
-                    currentIndex = index;
-                    handleMediaClick(item, currentIndex);
-                }
-            });
-        });
-
-    }
-
-    // Fonction pour mettre à jour les likes
-
-    function updateLikes(liked) {
-        if (liked) {
-            updatedTotalLikes = updatedTotalLikes + 1;
-        } else {
-            updatedTotalLikes = updatedTotalLikes - 1;
-        }
-        likesAmount.textContent = updatedTotalLikes;
-    }
     
-    // Affichage de la modale du bas
+    // ------------- Affichage de la modale du bas ------------- //
     
     likesAmount.textContent = updatedTotalLikes;
     priceNumber.textContent = `${price}€ / jour`;

@@ -125,7 +125,7 @@ img.arrow-top {
     column-gap: 90px;
 }
 
-.gallery_image_wrapper {
+.gallery_image_wrapper, .gallery_video_wrapper {
     cursor: pointer;
 }
 

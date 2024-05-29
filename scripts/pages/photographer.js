@@ -18,19 +18,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const urlParams = new URLSearchParams(window.location.search);
       const urlID = urlParams.get('id');
-      const photographerData = photographers.filter(x => x.id == urlID);
+      const photographerData = photographers.find(x => x.id == urlID);
   
       // Hydratation des champs dans l'entête de la page de chaque photographe
 
       const title = document.querySelector(".photographer_data h1");
-      title.textContent = photographerData[0].name;
+      title.textContent = photographerData.name;
       const location = document.querySelector(".photographer_data span");
-      location.textContent = photographerData[0].city + ", " + photographerData[0].country;
+      location.textContent = photographerData.city + ", " + photographerData.country;
       const tagline = document.querySelector(".photographer_data p");
-      tagline.textContent = photographerData[0].tagline;
+      tagline.textContent = photographerData.tagline;
       const img = document.querySelector(".photograph-header img");
-      img.src = `assets/photographers/${photographerData[0].portrait}`;
-      img.alt = photographerData[0].name;
+      img.src = `assets/photographers/${photographerData.portrait}`;
+      img.alt = photographerData.name;
     
       // Gestion de la modale de contact (ouverture, fermeture et soumission du formulaire de contact)
 
@@ -39,11 +39,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Affichage de la Gallerie via le template 'photographerSingleTemplate'
 
       if (photographerData) {
-        const photographerId = photographerData[0].id;
-        const photographerPrice = photographerData[0].price;
+        const photographerId = photographerData.id;
+        const photographerPrice = photographerData.price;
         const filteredMedia = media.filter(item => item.photographerId === photographerId);
         const photographerTotalLikes = filteredMedia.reduce((total, media) => total + media.likes, 0);
         photographerSingleTemplate(filteredMedia, photographerTotalLikes, photographerPrice);
       }
     }
-  });
+});

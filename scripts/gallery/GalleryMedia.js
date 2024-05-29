@@ -87,7 +87,6 @@ class GalleryImage extends GalleryItem {
         imageWrapper.setAttribute("tabindex", 0);
         
         const image = document.createElement("img");
-
         image.src = `./assets/works/${this.id}/${this.item.image}`;
         image.className = "gallery_image";
         image.alt = this.item.title;
@@ -118,12 +117,10 @@ class GalleryVideo extends GalleryItem {
         const video = document.createElement("video");
         video.src = `./assets/works/${this.id}/${this.item.video}`;
         video.className = "gallery_video";
-        video.autoplay = true;
         video.controls = true;
 
         videoWrapper.appendChild(video);
         videoWrapper.appendChild(super.createDOMElement());
-
         return videoWrapper;
     }
 

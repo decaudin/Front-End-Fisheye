@@ -1,7 +1,7 @@
 export const contactForm = (photographerData) => {
 
   const contactModalTitle = document.querySelector(".contact_modal_title");
-  contactModalTitle.innerHTML = `Contactez-moi<br>${photographerData[0].name}`;
+  contactModalTitle.innerHTML = `Contactez-moi<br>${photographerData.name}`;
   const modal = document.querySelector(".modal");
   const form = document.getElementById("modal_form");
   const contactModal = document.getElementById("contact_modal");
