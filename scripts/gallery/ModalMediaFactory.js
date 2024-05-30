@@ -24,6 +24,7 @@ class ImageMedia {
         const img = document.createElement("img");
         img.className = "img_modal_picture";
         img.src = `./assets/works/${this.id}/${this.item.image}`;
+        img.alt = this.item.title;
         return img;
     }
 
@@ -47,6 +48,7 @@ class VideoMedia {
         video.className = "img_modal_picture";
         video.src = `./assets/works/${this.id}/${this.item.video}`;
         video.controls = true;
+        video.setAttribute("aria-label", this.item.title);
         return video;
     }
 

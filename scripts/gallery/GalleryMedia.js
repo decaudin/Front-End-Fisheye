@@ -111,6 +111,7 @@ class GalleryVideo extends GalleryItem {
         video.src = `./assets/works/${this.id}/${this.item.video}`;
         video.className = "gallery_video";
         video.controls = true;
+        video.setAttribute("aria-label", this.item.title);
 
         videoWrapper.appendChild(video);
         videoWrapper.appendChild(super.createDOMElement());
