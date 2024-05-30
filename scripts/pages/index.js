@@ -44,8 +44,6 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
             ({ photographers } = await getPhotographersData('../../data/photographers.json'));
         }
 
-        console.log('Photographers data:', photographers);
-
     //    const { photographers } = await getPhotographersData('../../data/photographers.json');
 
         displayData(photographers);
