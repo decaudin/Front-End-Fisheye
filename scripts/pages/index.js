@@ -28,21 +28,23 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
 
         // Récupération des données depuis le fichier JSON
 
-        let photographers;
+        let { photographers } = {};
 
         if (window.location.hostname === 'decaudin.github.io') {
 
             // Utilisation de chemins absolus pour GitHub Pages
 
             const baseRepoUrl = 'https://decaudin.github.io/Front-End-Fisheye';
-            photographers = await getPhotographersData(`${baseRepoUrl}/data/photographers.json`);
+            ({ photographers } = await getPhotographersData(`${baseRepoUrl}/data/photographers.json`));
 
         } else {
-            
+
             // Utilisation de chemins relatifs pour le développement local
 
-            photographers = await getPhotographersData('../../data/photographers.json');
+            ({ photographers } = await getPhotographersData('../../data/photographers.json'));
         }
+
+        console.log('Photographers data:', photographers);
 
     //    const { photographers } = await getPhotographersData('../../data/photographers.json');
 
