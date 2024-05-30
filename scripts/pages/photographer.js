@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Récupération des données depuis le fichier JSON
 
-    const data = await getPhotographersData("../../data/photographers.json");
+    const data = await getPhotographersData('../../data/photographers.json');
   
     if (data) {
 
