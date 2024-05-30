@@ -28,7 +28,7 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
 
         // Récupération des données depuis le fichier JSON
 
-        let { photographers } = {};
+        let photographers;
 
         if (window.location.hostname === 'decaudin.github.io') {
 
