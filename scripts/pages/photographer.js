@@ -8,7 +8,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Récupération des données depuis le fichier JSON
 
-    const data = await getPhotographersData('../../data/photographers.json');
+  //  const data = await getPhotographersData('../../data/photographers.json');
+
+  let data;
+
+  // Vérifier si l'application est en cours d'exécution sur GitHub Pages
+  if (window.location.hostname === 'decaudin.github.io') {
+      // Utilisation de chemins absolus pour GitHub Pages
+      const baseRepoUrl = 'https://decaudin.github.io/Front-End-Fisheye';
+       data = await getPhotographersData(`${baseRepoUrl}/data/photographers.json`);
+  } else {
+      // Utilisation de chemins relatifs pour le développement local
+      data = await getPhotographersData('../../data/photographers.json');
+  }
   
     if (data) {
 
