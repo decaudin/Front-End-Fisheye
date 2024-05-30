@@ -41,11 +41,12 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
             // Utilisation de chemins relatifs pour le développement local
 
             ({ photographers } = await getPhotographersData('../../data/photographers.json'));
-        } */
+        }*/
 
-        const { photographers } = await getPhotographersData('./../../data/photographers.json');
+        const { photographers } = await getPhotographersData('/data/photographers.json');
 
-        displayData(photographers);
+        displayData(photographers); 
+
     }
     
     init();
