@@ -35,7 +35,7 @@ export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => 
 
 
     // ------------- Gestion de la galerie de médias ------------- //
-    
+
 
     // Fonction pour afficher et mettre à jour la galerie de médias
 
@@ -51,15 +51,14 @@ export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => 
 
         filteredMedia.forEach((item, index) => {
 
-            let liked;
             let galleryItem;
 
             // Instanciation d'un élément de galerie en fonction de son type de média (image ou vidéo)
 
             if (item.image) {
-                galleryItem = new GalleryImage(item, liked);
+                galleryItem = new GalleryImage(item, item.liked);
             } else if (item.video) {
-                galleryItem = new GalleryVideo(item, liked);
+                galleryItem = new GalleryVideo(item, item.liked);
             } else {
                 throw new Error('Type de média non pris en charge');
             }
@@ -97,7 +96,7 @@ export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => 
                 }
             });
         });
-    };
+    };    
 
     // Fonction pour mettre à jour les likes
 

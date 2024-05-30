@@ -59,18 +59,11 @@ class GalleryItem {
     // Fonction pour like/dislike un élément de la galerie
 
     toggleLike() {
-        
-        if (this.liked) {
-            this.likesLogo.src = "./assets/icons/heart-red.svg";
-            this.likesValue.textContent = --this.item.likes;
-        } else if (!this.liked) {
-            this.likesLogo.src = "./assets/icons/heart-red-full.svg";
-            this.likesValue.textContent = ++this.item.likes;
-        }
-
+        this.likesLogo.src = this.liked ? "./assets/icons/heart-red.svg" : "./assets/icons/heart-red-full.svg";
+        this.likesValue.textContent = this.liked ? --this.item.likes : ++this.item.likes;
         this.liked = !this.liked;
-        
-    }    
+        this.item.liked = this.liked;
+    }
 }
 
 // Définition d'un modèle pour une image de la galerie
