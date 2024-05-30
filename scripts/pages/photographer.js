@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Récupération des données depuis le fichier JSON
 
-/*  let data;
+  let data;
 
   if (window.location.hostname === 'decaudin.github.io') {
 
@@ -20,10 +20,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Utilisation de chemins relatifs pour le développement local
 
-      data = await getPhotographersData('../../data/photographers.json');
-  } */
-
-  const data = await getPhotographersData('/data/photographers.json');
+      data = await getPhotographersData('/data/photographers.json');
+  }
   
   if (data) {
 
