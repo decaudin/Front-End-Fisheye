@@ -34,8 +34,7 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
 
             // Utilisation de chemins absolus pour GitHub Pages
 
-            const baseRepoUrl = 'https://decaudin.github.io/Front-End-Fisheye';
-            ({ photographers } = await getPhotographersData(`${baseRepoUrl}/data/photographers.json`));
+            ({ photographers } = await getPhotographersData('https://decaudin.github.io/Front-End-Fisheye/data/photographers.json'));
 
         } else {
 
@@ -43,8 +42,6 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
 
             ({ photographers } = await getPhotographersData('../../data/photographers.json'));
         }
-
-    //    const { photographers } = await getPhotographersData('../../data/photographers.json');
 
         displayData(photographers);
     }
