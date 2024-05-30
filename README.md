@@ -1,10 +1,10 @@
-# Bonjour et Bienvenue sur le code du projet P6 - Parcours Front-end de la formation DAJS d'OpenClassRoom
+## Bonjour et Bienvenue sur le code du projet P6 - Parcours Front-end de la formation DAJR d'OpenClassRooms
 
-## Clonez le repo avec la commande 'git clone https://github.com/decaudin/Front-End-Fisheye.git'
+1 - Clonez le repo avec la commande 'git clone https://github.com/decaudin/Front-End-Fisheye.git'
 
-### Installez les dépendances avec la commande 'npm install'
+2 - Installez les dépendances avec la commande 'npm install'
 
-#### Lancez le projet en ouvrant le fichier 'index.html'
+3 - Lancez le projet en ouvrant le fichier 'index.html'
 
-##### Bonne navigation
+Bonne navigation
 
