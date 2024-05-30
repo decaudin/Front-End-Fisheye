@@ -28,7 +28,7 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
 
         // Récupération des données depuis le fichier JSON
 
-        let { photographers } = {};
+    /*    let { photographers } = {};
 
         if (window.location.hostname === 'decaudin.github.io') {
 
@@ -41,7 +41,9 @@ import { addArticleClickEvent } from '../utils/photographerSimplePage.js';
             // Utilisation de chemins relatifs pour le développement local
 
             ({ photographers } = await getPhotographersData('../../data/photographers.json'));
-        }
+        } */
+
+        const { photographers } = await getPhotographersData('./../../data/photographers.json');
 
         displayData(photographers);
     }
