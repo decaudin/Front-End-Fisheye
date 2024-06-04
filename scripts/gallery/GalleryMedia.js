@@ -12,6 +12,8 @@ class GalleryItem {
         this.likesLogo.alt = "bouton j'aime";
     }
 
+    // Méthode pour créer et structurer les éléments DOM nécessaires pour afficher un élément de la galerie.
+
     createDOMElement() {
         const mediaWrapper = document.createElement("div");
         mediaWrapper.className = "gallery_img_wrapper";
