@@ -90,10 +90,6 @@ class GalleryImage extends GalleryItem {
         imageWrapper.appendChild(super.createDOMElement());
         return imageWrapper;
     }
-
-    toggleLike() {
-        super.toggleLike();
-    }
 }
 
 // Définition d'un modèle pour une vidéo de la galerie
@@ -118,10 +114,6 @@ class GalleryVideo extends GalleryItem {
         videoWrapper.appendChild(video);
         videoWrapper.appendChild(super.createDOMElement());
         return videoWrapper;
-    }
-
-    toggleLike() {
-        super.toggleLike();
     }
 }
 
