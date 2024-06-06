@@ -10,18 +10,23 @@ export const photographerTemplate = (data) => {
         const img = document.createElement('img');
         img.setAttribute("src", picture);
         img.setAttribute("alt", name);
+        img.setAttribute("tabindex", "0");
         
         const h2 = document.createElement('h2');
         h2.textContent = name;
+        h2.setAttribute("tabindex", "0");
         
         const h3 = document.createElement('h3');
         h3.textContent = `${city}, ${country}`;
+        h3.setAttribute("tabindex", "0");
         
         const p = document.createElement('p');
         p.textContent = tagline;
+        p.setAttribute("tabindex", "0");
         
         const span = document.createElement('span');
         span.textContent = `${price}€/jour`;
+        span.setAttribute("tabindex", "0");
         
         article.appendChild(img);
         article.appendChild(h2);
