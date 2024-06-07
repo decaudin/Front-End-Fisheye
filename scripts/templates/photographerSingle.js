@@ -213,40 +213,32 @@ export const photographerSingleTemplate = (filteredMedia, totalLikes, price) => 
     // Gestion du clic sur le bouton "Suivant"
 
     nextButton.addEventListener('click', () => {
-        if (currentIndex < filteredMedia.length - 1) {
-            currentIndex++;
-            handleMediaClick(filteredMedia[currentIndex]);
-        }
+        currentIndex = (currentIndex < filteredMedia.length - 1) ? currentIndex + 1 : 0;
+        handleMediaClick(filteredMedia[currentIndex]);
     });
 
     // Gestion de l'appui sur la touche "Enter" pour passer à l'élément suivant
 
     nextButton.addEventListener('keydown', (e) => {
         if (e.key === "Enter") {
-            if (currentIndex < filteredMedia.length - 1) {
-                currentIndex++;
-                handleMediaClick(filteredMedia[currentIndex]);
-            }
+            currentIndex = (currentIndex < filteredMedia.length - 1) ? currentIndex + 1 : 0;
+            handleMediaClick(filteredMedia[currentIndex]);
         }
-    });
+    });  
     
     // Gestion du clic sur le bouton "Précédent"
 
     prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            handleMediaClick(filteredMedia[currentIndex]);
-        }
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : filteredMedia.length - 1;
+        handleMediaClick(filteredMedia[currentIndex]);
     });
 
     // Gestion de l'appui sur la touche "Enter" pour passer à l'élément précédent
 
     prevButton.addEventListener('keydown', (e) => {
         if (e.key === "Enter") {
-            if (currentIndex > 0) {
-                currentIndex--;
-                handleMediaClick(filteredMedia[currentIndex]);
-            }
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : filteredMedia.length - 1;
+            handleMediaClick(filteredMedia[currentIndex]);
         }
     });
     
