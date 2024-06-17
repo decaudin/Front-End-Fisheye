@@ -33,17 +33,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     const urlID = urlParams.get('id');
     const photographerData = photographers.find(x => x.id == urlID);
   
-    // Hydratation des champs dans l'entête de la page de chaque photographe
+    // Création des balises dans l'entête de la page de chaque photographe
 
-    const title = document.querySelector(".photographer_data h1");
+    const photographerHeader = document.querySelector('.photograph-header');
+    const photographerDataDiv = document.querySelector('.photographer_data');
+
+    const title = document.createElement('h1');
     title.textContent = photographerData.name;
-    const location = document.querySelector(".photographer_data span");
-    location.textContent = photographerData.city + ", " + photographerData.country;
-    const tagline = document.querySelector(".photographer_data p");
+
+    const location = document.createElement('span');
+    location.textContent = `${photographerData.city}, ${photographerData.country}`;
+
+    const tagline = document.createElement('p');
     tagline.textContent = photographerData.tagline;
-    const img = document.querySelector(".photograph-header img");
+
+    photographerDataDiv.appendChild(title);
+    photographerDataDiv.appendChild(location);
+    photographerDataDiv.appendChild(tagline);
+
+    const img = document.createElement('img');
     img.src = `assets/photographers/${photographerData.portrait}`;
     img.alt = photographerData.name;
+
+    photographerHeader.appendChild(img);
     
     // Gestion de la modale de contact (ouverture, fermeture et soumission du formulaire de contact)
 
